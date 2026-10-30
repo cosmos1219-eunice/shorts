@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "KoDisplay";
+        src: local("Malgun Gothic Bold"), local("MalgunGothicBold"), local("Malgun Gothic");
+        font-weight: 700;
+      }
+      :root {
+        --sea-top: #5ec8f2;
+        --sea-bottom: #1f78c1;
+        --sand: #f1d9a0;
+        --ink: #ffffff;
+        --font-display: "KoDisplay", "Poppins", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--sea-bottom); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: var(--font-display); }
+      .layer { position: absolute; inset: 0; }
+      #sea { background: linear-gradient(180deg, var(--sea-top) 0%, #3aa3dd 55%, var(--sea-bottom) 100%); }
+      svg { position: absolute; overflow: visible; }
+      #title {
+        position: absolute; left: 0; right: 0; top: 200px; text-align: center;
+        color: var(--ink); font-size: 92px; font-weight: 700; letter-spacing: -0.02em;
+        -webkit-text-stroke: 10px #0b3f73; paint-order: stroke fill; text-shadow: 0 8px 0 #0b3f73;
+      }
+      #title span { display: inline-block; }
+      .bubble-say {
+        position: absolute; left: 470px; top: 330px; padding: 22px 34px; background: #fff; color: #2b3a3a;
+        border-radius: 40px; font-size: 52px; font-weight: 700; box-shadow: 0 8px 0 rgba(0,0,0,.15);
+        white-space: nowrap;
+      }
+      .bubble-say::after {
+        content: ""; position: absolute; right: 60px; bottom: -34px; border: 20px solid transparent;
+        border-top: 26px solid #fff; border-left-width: 0;
+      }
+      #endcard {
+        position: absolute; left: 0; right: 0; top: 270px; text-align: center; color: #fff;
+        font-size: 64px; font-weight: 700; -webkit-text-stroke: 8px #0b3f73; paint-order: stroke fill; text-shadow: 0 6px 0 #0b3f73;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920" data-layout-allow-overflow data-layout-allow-overlap>
+      <!-- Ocean + flower clouds + sand -->
+      <div id="bg" class="clip layer" data-start="0" data-duration="30" data-track-index="0" data-track-kind="graphics" style="z-index:0">
+        <div id="sea" class="layer"></div>
+        <svg id="flowers" width="1080" height="1920" viewBox="0 0 1080 1920" style="left:0;top:0">
+          <defs>
+            <g id="flower">
+              <circle cx="0" cy="-34" r="30" /><circle cx="32" cy="-10" r="30" /><circle cx="20" cy="28" r="30" />
+              <circle cx="-20" cy="28" r="30" /><circle cx="-32" cy="-10" r="30" /><circle cx="0" cy="0" r="22" fill="#fff8" />
+            </g>
+          </defs>
+          <g id="fl1" fill="#a6e3ff" opacity=".75"><use href="#flower" transform="translate(130,520) scale(1.3)" /></g>
+          <g id="fl2" fill="#ffd1ef" opacity=".7"><use href="#flower" transform="translate(560,180) scale(1.1)" /></g>
+          <g id="fl3" fill="#c6f7c8" opacity=".7"><use href="#flower" transform="translate(940,760) scale(1.5)" /></g>
+          <g id="fl4" fill="#fff2a8" opacity=".65"><use href="#flower" transform="translate(380,700) scale(0.9)" /></g>
+          <g id="fl5" fill="#d9c8ff" opacity=".65"><use href="#flower" transform="translate(90,1040) scale(1)" /></g>
+        </svg>
+        <!-- Pineapple house (left back) -->
+        <svg width="320" height="760" viewBox="0 0 320 760" style="left:-30px;top:600px">
+          <g fill="#3f9a3a"><path d="M160 210 L110 20 L150 120 L160 0 L172 120 L215 25 L180 210 Z" /><path d="M160 220 L40 80 L130 190 Z" /><path d="M160 220 L290 90 L190 190 Z" /></g>
+          <ellipse cx="160" cy="470" rx="150" ry="280" fill="#f2a12b" />
+          <g stroke="#c9741a" stroke-width="7" fill="none" opacity=".8">
+            <path d="M40 300 L280 620" /><path d="M20 420 L230 720" /><path d="M90 220 L300 500" />
+            <path d="M280 300 L40 620" /><path d="M300 420 L90 720" /><path d="M230 220 L20 500" />
+          </g>
+          <circle cx="110" cy="400" r="34" fill="#7fd0f0" stroke="#6b6f78" stroke-width="10" />
+          <path d="M120 750 L120 600 Q160 560 200 600 L200 750 Z" fill="#7b8a99" stroke="#565f6a" stroke-width="8" />
+        </svg>
+        <!-- Stone-head house (right) with Squidward's window -->
+        <svg id="stonehouse" width="420" height="1000" viewBox="0 0 420 1000" style="left:680px;top:330px">
+          <path d="M60 990 L40 260 Q40 60 210 40 Q380 60 380 260 L360 990 Z" fill="#5f84a6" />
+          <path d="M60 990 L40 260 Q40 60 210 40 L210 990 Z" fill="#6f95b8" />
+          <rect x="60" y="300" width="300" height="40" rx="14" fill="#4a6b8a" />
+          <path d="M190 430 Q170 640 200 700 Q240 720 260 690 Q240 600 230 430 Z" fill="#4a6b8a" />
+          <path d="M150 990 L150 820 Q210 770 270 820 L270 990 Z" fill="#7a5034" stroke="#3e2a1d" stroke-width="8" />
+        </svg>
+        <!-- Sand -->
+        <svg width="1080" height="700" viewBox="0 0 1080 700" style="left:0;top:1260px">
+          <path d="M0 60 Q270 0 540 50 T1080 40 L1080 700 L0 700 Z" fill="#f1d9a0" />
+          <path d="M0 120 Q300 70 560 120 T1080 110 L1080 700 L0 700 Z" fill="#e8ca86" />
+          <g fill="#d4b06a"><ellipse cx="160" cy="260" rx="40" ry="12" /><ellipse cx="760" cy="330" rx="60" ry="14" /><ellipse cx="470" cy="480" rx="50" ry="12" /><ellipse cx="960" cy="560" rx="38" ry="10" /></g>
+          <ellipse id="shadowSB" cx="345" cy="100" rx="130" ry="20" fill="#0003" />
+          <ellipse id="shadowPS" cx="748" cy="100" rx="140" ry="22" fill="#0003" />
+        </svg>
+      </div>
+
+      <!-- Squidward in the window -->
+      <div id="squid" class="clip layer" data-start="0" data-duration="30" data-track-index="1" data-track-kind="graphics" style="z-index:2">
+        <svg width="420" height="1000" viewBox="0 0 420 1000" style="left:680px;top:330px">
+          <defs><clipPath id="winclip"><rect x="95" y="120" width="230" height="170" rx="16" /></clipPath></defs>
+          <rect x="95" y="120" width="230" height="170" rx="16" fill="#2c3e57" />
+          <g clip-path="url(#winclip)">
+            <g id="sqHead">
+              <ellipse cx="210" cy="215" rx="88" ry="105" fill="#9dd3c2" />
+              <!-- eyes -->
+              <ellipse cx="180" cy="215" rx="26" ry="30" fill="#f6f1c8" /><ellipse cx="240" cy="215" rx="26" ry="30" fill="#f6f1c8" />
+              <g id="sqPupils" fill="#b0262d"><circle cx="182" cy="226" r="9" /><circle cx="238" cy="226" r="9" /></g>
+              <!-- heavy lids -->
+              <g id="sqLids" fill="#86bfae"><path d="M152 215 Q180 180 208 215 Z" /><path d="M212 215 Q240 180 268 215 Z" /></g>
+              <path d="M152 216 L208 212 M212 212 L268 216" stroke="#3d6156" stroke-width="5" />
+              <!-- nose -->
+              <path d="M200 230 Q186 300 205 330 Q232 330 226 300 Q220 270 220 230 Z" fill="#8cc6b4" />
+            </g>
+          </g>
+          <rect x="95" y="120" width="230" height="170" rx="16" fill="none" stroke="#3e5872" stroke-width="12" />
+          <rect x="80" y="282" width="260" height="24" rx="8" fill="#4a6b8a" />
+          <!-- crossed arms on sill -->
+          <path d="M130 282 Q210 262 290 282" stroke="#9dd3c2" stroke-width="22" stroke-linecap="round" fill="none" />
+          <g id="shutter"><rect x="95" y="120" width="230" height="170" rx="16" fill="#a0784f" /><g stroke="#7a5634" stroke-width="6"><path d="M95 150 H325 M95 185 H325 M95 220 H325 M95 255 H325" /></g></g>
+        </svg>
+      </div>
+
+      <!-- SpongeBob-style sponge -->
+      <div id="sponge" class="clip layer" data-start="0" data-duration="30" data-track-index="2" data-track-kind="graphics" style="z-index:3">
+        <svg width="390" height="572" viewBox="0 0 300 440" style="left:150px;top:822px">
+          <g id="sb">
+            <g id="sbLegL"><path d="M115 300 L115 395" stroke="#f6e04b" stroke-width="10" /><rect x="105" y="360" width="20" height="30" fill="#fff" /><path d="M105 380 h20 M105 372 h20" stroke="#e33" stroke-width="3"/><ellipse cx="108" cy="402" rx="28" ry="14" fill="#111" /></g>
+            <g id="sbLegR"><path d="M185 300 L185 395" stroke="#f6e04b" stroke-width="10" /><rect x="175" y="360" width="20" height="30" fill="#fff" /><path d="M175 380 h20 M175 372 h20" stroke="#e33" stroke-width="3"/><ellipse cx="192" cy="402" rx="28" ry="14" fill="#111" /></g>
+            <g id="sbBody">
+              <path d="M40 30 Q60 15 80 28 Q100 15 120 28 Q140 15 160 28 Q180 15 200 28 Q220 15 240 28 Q262 22 262 45 L262 255 L38 255 L38 45 Q38 30 40 30 Z" fill="#f6e04b" stroke="#c9a92b" stroke-width="5" />
+              <g fill="#c4c22f" opacity=".7"><ellipse cx="70" cy="60" rx="12" ry="16"/><ellipse cx="230" cy="70" rx="10" ry="14"/><ellipse cx="60" cy="200" rx="14" ry="10"/><ellipse cx="235" cy="215" rx="12" ry="9"/><ellipse cx="150" cy="235" rx="9" ry="7"/></g>
+              <rect x="38" y="245" width="224" height="22" fill="#fff" />
+              <path d="M38 267 L262 267 L262 310 L38 310 Z" fill="#9a6131" />
+              <path d="M38 280 L262 280" stroke="#222" stroke-width="6" stroke-dasharray="30 14" />
+              <path d="M150 248 L140 262 L150 300 L160 262 Z" fill="#d9282f" />
+              <g id="sbEyes">
+                <circle cx="112" cy="105" r="36" fill="#fff" stroke="#555" stroke-width="3" /><circle cx="188" cy="105" r="36" fill="#fff" stroke="#555" stroke-width="3" />
+                <circle cx="116" cy="105" r="16" fill="#44a7e8" /><circle cx="184" cy="105" r="16" fill="#44a7e8" />
+                <circle cx="116" cy="105" r="8" fill="#111" /><circle cx="184" cy="105" r="8" fill="#111" />
+                <path d="M88 72 l-8 -16 M108 68 l0 -18 M128 72 l8 -16 M172 72 l-8 -16 M192 68 l0 -18 M212 72 l8 -16" stroke="#111" stroke-width="4" />
+              </g>
+              <path d="M146 115 Q170 118 160 140 Q148 140 146 128 Z" fill="#e8d03c" stroke="#c9a92b" stroke-width="3" />
+              <path id="sbMouth" d="M78 160 Q150 230 222 160 Q150 205 78 160 Z" fill="#8a1b1b" stroke="#6b1414" stroke-width="4" />
+              <rect x="128" y="176" width="20" height="20" fill="#fff" stroke="#888" stroke-width="2"/><rect x="152" y="176" width="20" height="20" fill="#fff" stroke="#888" stroke-width="2"/>
+              <g fill="#f2a1a1"><circle cx="70" cy="160" r="12" /><circle cx="230" cy="160" r="12" /></g>
+              <g id="sbArmL"><path d="M38 200 L0 260" stroke="#f6e04b" stroke-width="10" stroke-linecap="round" /><path d="M38 192 L18 200 L28 220 L42 215 Z" fill="#fff" /><circle cx="0" cy="262" r="12" fill="#f6e04b" /></g>
+              <g id="sbArmR"><path d="M262 200 L300 260" stroke="#f6e04b" stroke-width="10" stroke-linecap="round" /><path d="M262 192 L282 200 L272 220 L258 215 Z" fill="#fff" /><circle cx="300" cy="262" r="12" fill="#f6e04b" /></g>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Patrick-style starfish -->
+      <div id="star" class="clip layer" data-start="0" data-duration="30" data-track-index="3" data-track-kind="graphics" style="z-index:3">
+        <svg width="416" height="598" viewBox="0 0 320 460" style="left:540px;top:790px">
+          <g id="ps">
+            <g id="psLegL"><path d="M100 330 Q80 400 70 440 L130 440 Q140 390 150 330 Z" fill="#f59fb4" stroke="#d47790" stroke-width="4" /></g>
+            <g id="psLegR"><path d="M220 330 Q240 400 250 440 L190 440 Q180 390 170 330 Z" fill="#f59fb4" stroke="#d47790" stroke-width="4" /></g>
+            <g id="psBody">
+              <g id="psArmL"><path d="M110 170 Q40 170 8 215 Q40 230 110 215 Z" fill="#f59fb4" stroke="#d47790" stroke-width="4" /></g>
+              <g id="psArmR"><path d="M210 170 Q280 170 312 215 Q280 230 210 215 Z" fill="#f59fb4" stroke="#d47790" stroke-width="4" /></g>
+              <path d="M160 6 C200 80 250 220 250 320 L70 320 C70 220 120 80 160 6 Z" fill="#f59fb4" stroke="#d47790" stroke-width="5" />
+              <path d="M66 285 L254 285 L262 360 L180 360 L160 335 L140 360 L58 360 Z" fill="#8bc34a" stroke="#5c8a2c" stroke-width="4" />
+              <g fill="#a35bd1"><circle cx="95" cy="320" r="11"/><circle cx="160" cy="305" r="11"/><circle cx="225" cy="325" r="11"/><circle cx="125" cy="345" r="9"/><circle cx="205" cy="348" r="9"/></g>
+              <g fill="#fff"><circle cx="95" cy="320" r="4"/><circle cx="160" cy="305" r="4"/><circle cx="225" cy="325" r="4"/></g>
+              <g id="psEyes">
+                <ellipse cx="140" cy="115" rx="16" ry="24" fill="#fff" stroke="#333" stroke-width="3" /><ellipse cx="180" cy="115" rx="16" ry="24" fill="#fff" stroke="#333" stroke-width="3" />
+                <circle cx="143" cy="120" r="7" fill="#111" /><circle cx="177" cy="120" r="7" fill="#111" />
+                <path d="M122 82 L150 90 M198 82 L170 90" stroke="#111" stroke-width="5" stroke-linecap="round" />
+              </g>
+              <path id="psMouth" d="M120 170 Q160 230 200 170 Z" fill="#8a1b1b" stroke="#6b1414" stroke-width="4" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Rising bubbles -->
+      <div id="bubbles" class="clip layer" data-start="0" data-duration="30" data-track-index="4" data-track-kind="graphics" style="z-index:4">
+        <svg width="1080" height="1920" viewBox="0 0 1080 1920" style="left:0;top:0">
+          <g fill="none" stroke="#ffffffb0" stroke-width="5">
+            <circle class="bub" cx="80" cy="2000" r="18" /><circle class="bub" cx="300" cy="2000" r="12" /><circle class="bub" cx="520" cy="2000" r="22" />
+            <circle class="bub" cx="660" cy="2000" r="14" /><circle class="bub" cx="900" cy="2000" r="20" /><circle class="bub" cx="1010" cy="2000" r="10" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Title -->
+      <h1 id="title" class="clip" data-start="0" data-duration="26" data-track-index="5" data-track-kind="graphics" style="z-index:6">
+        <span id="t1" data-var-text="title">비키니시티 댄스 타임!</span>
+      </h1>
+
+      <!-- Squidward lines -->
+      <div id="say1" class="clip bubble-say" data-start="7.5" data-duration="3.2" data-track-index="6" data-track-kind="graphics" style="z-index:7"><span id="say1t">…한심하군.</span></div>
+      <div id="say2" class="clip bubble-say" data-start="16.9" data-duration="3.2" data-track-index="6" data-track-kind="graphics" style="z-index:7"><span id="say2t">또 시작이네…</span></div>
+      <div id="say3" class="clip bubble-say" data-start="23.4" data-duration="2.6" data-track-index="6" data-track-kind="graphics" style="z-index:7"><span id="say3t">됐다, 안 봐.</span></div>
+
+      <div id="endcard" class="clip" data-start="26" data-duration="4" data-track-index="5" data-track-kind="graphics" style="z-index:6"><span id="endt">징징이만 빼고 다 같이 춤춰!</span></div>
+
+      <audio id="beat" class="clip" src="assets/beat.mp3" data-start="0" data-duration="30" data-track-index="7"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const B = 0.46875; // 128 BPM
+      const BAR = B * 4;
+      const beats = Math.floor(30 / B);
+      const o = { transformOrigin: "50% 100%" };
+      gsap.set(["#sb", "#ps"], o);
+      gsap.set("#sbArmL", { svgOrigin: "38 200" });
+      gsap.set("#sbArmR", { svgOrigin: "262 200" });
+      gsap.set("#psArmL", { svgOrigin: "110 192" });
+      gsap.set("#psArmR", { svgOrigin: "210 192" });
+      gsap.set(["#sbLegL", "#sbLegR"], { transformOrigin: "50% 0%" });
+      gsap.set(["#psLegL", "#psLegR"], { transformOrigin: "50% 0%" });
+      gsap.set("#shutter", { y: -200 });
+
+      // Hook: title pops on frame 0-ish
+      tl.from("#t1", { scale: 0.4, y: 40, duration: 0.35, ease: "back.out(3)" }, 0);
+      for (let i = 0; i < beats && i * B < 25.5; i++) {
+        tl.to("#t1", { scale: i % 2 ? 1 : 1.06, duration: B * 0.5, ease: "power2.out" }, i * B + 0.35);
+      }
+
+      // Flower clouds drift
+      ["#fl1", "#fl2", "#fl3", "#fl4", "#fl5"].forEach((id, k) => {
+        tl.to(id, { x: (k % 2 ? -1 : 1) * 60, rotation: k % 2 ? -20 : 20, svgOrigin: "540 960", duration: 30, ease: "none" }, 0);
+      });
+
+      // Bubbles rise in waves
+      gsap.utils.toArray(".bub").forEach((b, k) => {
+        for (let t = k * 0.9; t < 29; t += 5.5) {
+          tl.fromTo(b, { y: 0, x: 0 }, { y: -2150, x: (k % 2 ? 40 : -40), duration: 5.5, ease: "none" }, t);
+        }
+      });
+
+      // Dance: a new move every 2 bars (3.75 s)
+      const moves = ["bounce", "arms", "side", "twist", "jump", "arms", "side", "bounce"];
+      for (let i = 0; i < beats; i++) {
+        const t = i * B;
+        if (t + B * 2 > 28.6) break;
+        const move = moves[Math.floor(t / (BAR * 2)) % moves.length];
+        const even = i % 2 === 0;
+        const dir = even ? 1 : -1;
+        // Base bounce for both, Patrick a hair behind for groove
+        tl.to("#sb", { keyframes: [{ y: -38, scaleY: 1.05, scaleX: 0.96, duration: B * 0.45, ease: "power2.out" }, { y: 0, scaleY: 0.93, scaleX: 1.06, duration: B * 0.5, ease: "power2.in" }] }, t);
+        tl.to("#ps", { keyframes: [{ y: -30, scaleY: 1.06, scaleX: 0.95, duration: B * 0.45, ease: "power2.out" }, { y: 0, scaleY: 0.92, scaleX: 1.07, duration: B * 0.5, ease: "power2.in" }] }, t + 0.04);
+        tl.to("#shadowSB", { scaleX: 0.8, transformOrigin: "50% 50%", duration: B * 0.45, yoyo: true, repeat: 1 }, t);
+        tl.to("#shadowPS", { scaleX: 0.82, transformOrigin: "50% 50%", duration: B * 0.45, yoyo: true, repeat: 1 }, t + 0.04);
+
+        if (move === "bounce") {
+          tl.to("#sbArmL", { rotation: dir * 25, duration: B * 0.9, ease: "sine.inOut" }, t);
+          tl.to("#sbArmR", { rotation: dir * 25, duration: B * 0.9, ease: "sine.inOut" }, t);
+          tl.to("#psArmL", { rotation: -dir * 20, duration: B * 0.9, ease: "sine.inOut" }, t);
+          tl.to("#psArmR", { rotation: -dir * 20, duration: B * 0.9, ease: "sine.inOut" }, t);
+          tl.to(["#sb", "#ps"], { rotation: 0, x: 0, duration: B * 0.5 }, t);
+        } else if (move === "arms") {
+          tl.to("#sbArmL", { rotation: even ? 120 : 20, duration: B * 0.6, ease: "back.out(2)" }, t);
+          tl.to("#sbArmR", { rotation: even ? -20 : -120, duration: B * 0.6, ease: "back.out(2)" }, t);
+          tl.to("#psArmL", { rotation: even ? 60 : -10, duration: B * 0.6, ease: "back.out(2)" }, t);
+          tl.to("#psArmR", { rotation: even ? 10 : -60, duration: B * 0.6, ease: "back.out(2)" }, t);
+          tl.to(["#sb", "#ps"], { rotation: dir * 6, x: 0, duration: B * 0.6 }, t);
+        } else if (move === "side") {
+          tl.to("#sb", { x: dir * 50, rotation: dir * 8, duration: B * 0.9, ease: "power1.inOut" }, t);
+          tl.to("#ps", { x: -dir * 50, rotation: -dir * 8, duration: B * 0.9, ease: "power1.inOut" }, t);
+          tl.to("#sbLegL", { rotation: dir * 20, duration: B * 0.5 }, t);
+          tl.to("#sbLegR", { rotation: dir * 20, duration: B * 0.5 }, t);
+          tl.to("#psLegL", { rotation: -dir * 12, duration: B * 0.5 }, t);
+          tl.to("#psLegR", { rotation: -dir * 12, duration: B * 0.5 }, t);
+          tl.to(["#sbArmL", "#sbArmR", "#psArmL", "#psArmR"], { rotation: dir * 35, duration: B * 0.6 }, t);
+        } else if (move === "twist") {
+          tl.to("#sb", { rotation: dir * 14, x: 0, duration: B * 0.8, ease: "sine.inOut" }, t);
+          tl.to("#ps", { rotation: -dir * 14, x: 0, duration: B * 0.8, ease: "sine.inOut" }, t);
+          tl.to("#sbLegL", { rotation: -dir * 25, duration: B * 0.5 }, t);
+          tl.to("#sbLegR", { rotation: dir * 25, duration: B * 0.5 }, t);
+          tl.to(["#sbArmL", "#psArmL"], { rotation: 70, duration: B * 0.5 }, t);
+          tl.to(["#sbArmR", "#psArmR"], { rotation: -70, duration: B * 0.5 }, t);
+        } else if (move === "jump" && i % 4 === 0) {
+          tl.to("#sb", { keyframes: [{ y: -170, rotation: 360, duration: B * 1.0, ease: "power2.out" }, { y: 0, duration: B * 0.9, ease: "bounce.out" }] }, t);
+          tl.set("#sb", { rotation: 0 }, t + B * 1.95);
+          tl.to("#ps", { keyframes: [{ y: -120, duration: B * 0.9, ease: "power2.out" }, { y: 0, duration: B * 0.9, ease: "power2.in" }] }, t + B);
+          tl.to(["#sbArmL", "#psArmL"], { rotation: 140, duration: B * 0.5 }, t);
+          tl.to(["#sbArmR", "#psArmR"], { rotation: -140, duration: B * 0.5 }, t);
+        }
+        if (move !== "side" && move !== "twist") {
+          tl.to(["#sbLegL", "#sbLegR", "#psLegL", "#psLegR"], { rotation: 0, duration: B * 0.4 }, t);
+        }
+      }
+
+      // Final pose: arms up, wave
+      tl.to(["#sb", "#ps"], { x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 28.6);
+      tl.to(["#sbArmL", "#psArmL"], { rotation: 130, duration: 0.3 }, 28.6);
+      tl.to(["#sbArmR", "#psArmR"], { rotation: -150, duration: 0.3 }, 28.6);
+      tl.to(["#sbArmR", "#psArmR"], { rotation: -110, duration: 0.2, yoyo: true, repeat: 3 }, 28.9);
+      tl.to(["#sbLegL", "#sbLegR", "#psLegL", "#psLegR"], { rotation: 0, duration: 0.3 }, 28.6);
+
+      // Mouths sing
+      for (let t = 0; t < 28.5; t += B * 2) {
+        tl.to("#sbMouth", { scaleY: 0.75, transformOrigin: "50% 0%", duration: B * 0.5, yoyo: true, repeat: 1 }, t);
+        tl.to("#psMouth", { scaleY: 1.3, transformOrigin: "50% 0%", duration: B * 0.5, yoyo: true, repeat: 1 }, t + B);
+      }
+
+      // Squidward: unimpressed stare, eye rolls, head shakes, then shutter
+      tl.from("#sqHead", { y: 140, duration: 0.4, ease: "power2.out" }, 0.2);
+      const rolls = [5.2, 12.4, 20.6];
+      rolls.forEach((t) => {
+        tl.to("#sqPupils", { y: -16, x: 6, duration: 0.35, ease: "sine.inOut" }, t);
+        tl.to("#sqPupils", { y: 0, x: 0, duration: 0.35, ease: "sine.inOut" }, t + 0.9);
+      });
+      [8.0, 17.4].forEach((t) => {
+        tl.to("#sqHead", { keyframes: [{ x: -10, duration: 0.15 }, { x: 10, duration: 0.15 }, { x: -8, duration: 0.15 }, { x: 0, duration: 0.15 }] }, t);
+      });
+      tl.to("#sqLids", { y: 8, duration: 1.2, ease: "sine.inOut" }, 14);
+      tl.to("#sqHead", { y: 140, duration: 0.5, ease: "power2.in" }, 25.3);
+      tl.to("#shutter", { y: 0, duration: 0.35, ease: "bounce.out" }, 25.6);
+
+      // Speech bubbles pop
+      ["#say1t", "#say2t", "#say3t"].forEach((id, k) => {
+        const s = [7.5, 16.9, 23.4][k];
+        tl.from(id, { scale: 0.5, opacity: 0, duration: 0.25, ease: "back.out(2.5)" }, s);
+      });
+      tl.from("#endt", { y: 50, opacity: 0, duration: 0.4, ease: "back.out(2)" }, 26);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
